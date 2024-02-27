@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
@@ -31,6 +31,13 @@
         <item row="0" column="0">
          <widget class="QGraphicsView" name="graphicsView"/>
         </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Очистить все</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
@@ -39,29 +46,43 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="3" column="0">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+         <widget class="QPlainTextEdit" name="left_incident">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
-         </spacer>
+         </widget>
         </item>
         <item row="0" column="2">
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Матрица смежности</string>
+           <string>Матрица смежности:</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label">
+        <item row="1" column="0">
+         <widget class="QTableView" name="incident">
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QPlainTextEdit" name="right_incident">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_4">
           <property name="text">
-           <string/>
+           <string>Множество правых инциденций:</string>
           </property>
          </widget>
         </item>
@@ -72,17 +93,17 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_2">
+        <item row="2" column="0">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>Матрица инцидентности</string>
+           <string>Множество левых инциденций:</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QTableView" name="incident">
-          <property name="sizeAdjustPolicy">
-           <enum>QAbstractScrollArea::AdjustToContents</enum>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Матрица инцидентности:</string>
           </property>
          </widget>
         </item>

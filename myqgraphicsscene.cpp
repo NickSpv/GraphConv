@@ -97,3 +97,35 @@ QVector<QVector<int>> MyQGraphicsScene::get_ligament() {
     }
     return ligament;
 }
+
+void MyQGraphicsScene::clear() {
+    for (auto& i : this->graph_nodes) delete i;
+    this->graph_nodes.clear();
+    for (auto& i : this->arrows) delete i;
+    this->arrows.clear();
+    this->current_node_index = 0;
+    this->current_arrow = nullptr;
+    this->update();
+}
+
+QVector<QVector<int>> MyQGraphicsScene::get_left_incident() {
+    QVector<QVector<int>> left_incident(this->graph_nodes.size(),
+                                   QVector<int>(0));
+    this->numerate_arrows();
+    for (int i = 0; i < this->arrows.size(); i++) {
+        left_incident[static_cast<const GraphNode*>(this->arrows[i]->getStartItem())->getNum() - 1]
+            .append(static_cast<const GraphNode*>(this->arrows[i]->getEndItem())->getNum() - 1);
+    }
+    return left_incident;
+}
+
+QVector<QVector<int>> MyQGraphicsScene::get_right_incident() {
+    QVector<QVector<int>> right_incident(this->graph_nodes.size(),
+                                   QVector<int>(0));
+    this->numerate_arrows();
+    for (int i = 0; i < this->arrows.size(); i++) {
+        right_incident[static_cast<const GraphNode*>(this->arrows[i]->getEndItem())->getNum() - 1]
+            .append(static_cast<const GraphNode*>(this->arrows[i]->getStartItem())->getNum() - 1);
+    }
+    return right_incident;
+}

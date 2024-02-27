@@ -23,9 +23,13 @@ public:
 
     QVector<QVector<int>> get_incident();
     QVector<QVector<int>> get_ligament();
+    QVector<QVector<int>> get_left_incident();
+    QVector<QVector<int>> get_right_incident();
+
 
     bool arrow_exist(const QGraphicsItem* from, const QGraphicsItem* to);
     void numerate_arrows();
+    void clear();
 
 private:
     bool right_mouse_pressed = false;
