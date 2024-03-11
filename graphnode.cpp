@@ -17,3 +17,11 @@ void GraphNode::setNum(const int& num) {
 int GraphNode::getNum() const {
     return this->num;
 }
+
+void GraphNode::setDefaultNum(const int& num) {
+    this->default_num = num;
+}
+
+int GraphNode::getDefaultNum() const {
+    return this->default_num;
+}

@@ -54,7 +54,7 @@ void GraphConv::on_tabWidget_currentChanged(int index) {
         QVector<QVector<int>> left_incident = this->scene->get_left_incident();
         ui->left_incident->clear();
         for (int i = 0; i < left_incident.size(); i++) {
-            ui->left_incident->insertPlainText("G+(" +
+            ui->left_incident->insertPlainText("G-(" +
                                                 QString::number(i + 1) +
                                                 ") = {");
             for (int j = 0; j < left_incident[i].size(); j++) {
@@ -70,5 +70,19 @@ void GraphConv::on_tabWidget_currentChanged(int index) {
 void GraphConv::on_pushButton_clicked()
 {
     this->scene->clear();
+}
+
+
+void GraphConv::on_pushButton_2_clicked()
+{
+    this->scene->hierarchical_level_selection();
+    this->scene->update();
+}
+
+
+void GraphConv::on_pushButton_3_clicked()
+{
+    this->scene->set_default();
+    this->scene->update();
 }
 

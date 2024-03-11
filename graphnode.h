@@ -12,12 +12,15 @@ public:
 
     void setNum(const int& num);
     int getNum() const;
+    void setDefaultNum(const int& num);
+    int getDefaultNum() const;
 
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 
 private:
     int num = 0;
+    int default_num = 0;
 };
 
 #endif // GRAPHNODE_H

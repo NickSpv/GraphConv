@@ -27,9 +27,13 @@ public:
     QVector<QVector<int>> get_right_incident();
 
 
+    int get_count_input_arrow(const GraphNode*);
+    int get_count_output_arrow(const GraphNode*);
     bool arrow_exist(const QGraphicsItem* from, const QGraphicsItem* to);
     void numerate_arrows();
     void clear();
+    QMap<int, int> hierarchical_level_selection();
+    void set_default();
 
 private:
     bool right_mouse_pressed = false;

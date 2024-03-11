@@ -103,9 +103,59 @@ void MyQGraphicsScene::clear() {
     this->graph_nodes.clear();
     for (auto& i : this->arrows) delete i;
     this->arrows.clear();
-    this->current_node_index = 0;
+    this->current_node_index = 1;
     this->current_arrow = nullptr;
     this->update();
+}
+
+int MyQGraphicsScene::get_count_input_arrow(const GraphNode* node) {
+    int count_input_arrow = 0;
+    for (auto arrow : this->arrows) {
+        if (arrow->getEndItem() == node) count_input_arrow++;
+    }
+    return count_input_arrow;
+}
+
+int MyQGraphicsScene::get_count_output_arrow(const GraphNode* node) {
+    int count_output_arrow = 0;
+    for (auto arrow : this->arrows) {
+        if (arrow->getStartItem() == node) count_output_arrow++;
+    }
+    return count_output_arrow;
+}
+
+QMap<int, int> MyQGraphicsScene::hierarchical_level_selection() {
+    QVector<QVector<int>> ligament = this->get_ligament();
+    QMap<int, int> number_nodes;
+    QSet<int> selected_nodes;
+    QVector<QVector<int>> levels;
+    bool select;
+    QVector<int> level;
+    int current_new_num = 0;
+    while (selected_nodes.size() != ligament.size()) {
+        for (int i = 0; i < ligament.size(); i++) {
+            if (selected_nodes.contains(i)) continue;
+            select = true;
+            for (int j = 0; j < ligament.size(); j++) {
+                if (ligament[j][i] == 1 and not selected_nodes.contains(j)) {
+                    select = false;
+                    break;
+                }
+            }
+            if (select) {
+                level.append(i);
+                number_nodes[i] = current_new_num;
+                current_new_num++;
+            }
+        }
+        for (auto i : level) selected_nodes.insert(i);
+        levels.append(level);
+    }
+    for (auto& i : this->graph_nodes) {
+        i->setDefaultNum(i->getNum());
+        i->setNum(number_nodes[i->getNum()-1]+1);
+    }
+    return number_nodes;
 }
 
 QVector<QVector<int>> MyQGraphicsScene::get_left_incident() {
@@ -128,4 +178,10 @@ QVector<QVector<int>> MyQGraphicsScene::get_right_incident() {
             .append(static_cast<const GraphNode*>(this->arrows[i]->getStartItem())->getNum() - 1);
     }
     return right_incident;
+}
+
+void MyQGraphicsScene::set_default() {
+    for (auto& i : this->graph_nodes) {
+        i->setNum(i->getDefaultNum());
+    }
 }
