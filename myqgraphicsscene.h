@@ -14,8 +14,24 @@
 class MyQGraphicsScene : public QGraphicsScene
 {
 public:
-    explicit MyQGraphicsScene(QObject *parent = nullptr): QGraphicsScene{parent} {}
-    explicit MyQGraphicsScene(const QRectF& sceneRect, QObject *parent = nullptr): QGraphicsScene{sceneRect, parent} {}
+    explicit MyQGraphicsScene(QObject *parent = nullptr): QGraphicsScene{parent} {
+        level_color.insert(0, QColor(Qt::red));
+        level_color.insert(1, QColor(Qt::green));
+        level_color.insert(2, QColor(Qt::magenta));
+        level_color.insert(3, QColor(Qt::yellow));
+        level_color.insert(4, QColor(Qt::white));
+        level_color.insert(5, QColor(Qt::blue));
+        level_color.insert(6, QColor(Qt::cyan));
+        level_color.insert(7, QColor(Qt::gray));
+        level_color.insert(8, QColor(Qt::darkRed));
+        level_color.insert(9, QColor(Qt::darkGreen));
+        level_color.insert(10, QColor(Qt::darkMagenta));
+        level_color.insert(11, QColor(Qt::darkYellow));
+        level_color.insert(12, QColor(Qt::lightGray));
+        level_color.insert(13, QColor(Qt::darkBlue));
+        level_color.insert(14, QColor(Qt::darkCyan));
+        level_color.insert(15, QColor(Qt::darkGray));
+    }
 
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
@@ -41,6 +57,7 @@ private:
     QVector<Arrow*> arrows;
     Arrow* current_arrow = nullptr;
     int current_node_index = 1;
+    QMap<int, QColor> level_color;
 };
 
 #endif // MYQGRAPHICSSCENE_H

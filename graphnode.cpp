@@ -1,7 +1,7 @@
 #include "graphnode.h"
 
 void GraphNode::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) {
-    painter->setBrush(QBrush(Qt::green));
+    painter->setBrush(QBrush(this->color));
     painter->drawEllipse(-20, -20, 40, 40);
     painter->drawText(QRectF(-10, -10, 20, 20), Qt::AlignCenter, QString::number(this->num));
 }
@@ -24,4 +24,8 @@ void GraphNode::setDefaultNum(const int& num) {
 
 int GraphNode::getDefaultNum() const {
     return this->default_num;
+}
+
+void GraphNode::setColor(QColor color) {
+    this->color = color;
 }

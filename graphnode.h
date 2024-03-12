@@ -14,6 +14,7 @@ public:
     int getNum() const;
     void setDefaultNum(const int& num);
     int getDefaultNum() const;
+    void setColor(QColor color);
 
     QRectF boundingRect() const;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
@@ -21,6 +22,7 @@ public:
 private:
     int num = 0;
     int default_num = 0;
+    QColor color = Qt::green;
 };
 
 #endif // GRAPHNODE_H

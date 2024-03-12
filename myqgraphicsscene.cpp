@@ -131,8 +131,11 @@ QMap<int, int> MyQGraphicsScene::hierarchical_level_selection() {
     QVector<QVector<int>> levels;
     bool select;
     QVector<int> level;
+    QMap<int, int> node_level;
+    int current_level = 0;
     int current_new_num = 0;
     while (selected_nodes.size() != ligament.size()) {
+        level.clear();
         for (int i = 0; i < ligament.size(); i++) {
             if (selected_nodes.contains(i)) continue;
             select = true;
@@ -143,18 +146,27 @@ QMap<int, int> MyQGraphicsScene::hierarchical_level_selection() {
                 }
             }
             if (select) {
+                node_level[i] = current_level;
                 level.append(i);
                 number_nodes[i] = current_new_num;
                 current_new_num++;
             }
         }
-        for (auto i : level) selected_nodes.insert(i);
+        qInfo() << current_level << " : " ;
+        for (auto i : level) {
+            selected_nodes.insert(i);
+            qInfo() << i << " ";
+        }
+        qInfo() << "\n";
+        current_level++;
         levels.append(level);
     }
     for (auto& i : this->graph_nodes) {
+        i->setColor(this->level_color[node_level[i->getNum()-1]]);
         i->setDefaultNum(i->getNum());
         i->setNum(number_nodes[i->getNum()-1]+1);
     }
+    this->numerate_arrows();
     return number_nodes;
 }
 
@@ -183,5 +195,7 @@ QVector<QVector<int>> MyQGraphicsScene::get_right_incident() {
 void MyQGraphicsScene::set_default() {
     for (auto& i : this->graph_nodes) {
         i->setNum(i->getDefaultNum());
+        i->setColor(QColor(Qt::green));
     }
+    this->numerate_arrows();
 }

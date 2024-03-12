@@ -41,7 +41,7 @@ void GraphConv::on_tabWidget_currentChanged(int index) {
         QVector<QVector<int>> right_incident = this->scene->get_right_incident();
         ui->right_incident->clear();
         for (int i = 0; i < right_incident.size(); i++) {
-            ui->right_incident->insertPlainText("G+(" +
+            ui->right_incident->insertPlainText("G-(" +
                                                 QString::number(i + 1) +
                                                 ") = {");
             for (int j = 0; j < right_incident[i].size(); j++) {
@@ -54,7 +54,7 @@ void GraphConv::on_tabWidget_currentChanged(int index) {
         QVector<QVector<int>> left_incident = this->scene->get_left_incident();
         ui->left_incident->clear();
         for (int i = 0; i < left_incident.size(); i++) {
-            ui->left_incident->insertPlainText("G-(" +
+            ui->left_incident->insertPlainText("G+(" +
                                                 QString::number(i + 1) +
                                                 ") = {");
             for (int j = 0; j < left_incident[i].size(); j++) {
